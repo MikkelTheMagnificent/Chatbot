@@ -1,0 +1,5 @@
+# Ignore movie-corpus directory
+movie-corpus/utterances.jsonl
+
+# Ignore the entire virtual environment directory
+venv/

@@ -1,0 +1,130 @@
+{
+    "intents": [
+        {
+            "tag": "greetings",
+            "patterns": [
+                "hello",
+                "hey",
+                "hi",
+                "good day",
+                "greetings",
+                "what's up?",
+                "how is it going?",
+                "howdy",
+                "hiya",
+                "good morning",
+                "good afternoon",
+                "good evening",
+                "how are you?",
+                "what's new?",
+                "how do you do?",
+                "yo",
+                "hi there"
+            ],
+            "responses": [
+                "Hello!",
+                "Hey!",
+                "What can I do for you?",
+                "Hi there!",
+                "Greetings!",
+                "How can I assist you today?",
+                "Good to see you!",
+                "Hello, how are you?",
+                "Hey there!"
+            ]
+        },
+        {
+            "tag": "farewells",
+            "patterns": [
+                "goodbye",
+                "bye",
+                "see you later",
+                "farewell",
+                "take care",
+                "catch you later",
+                "see ya",
+                "bye bye",
+                "until next time",
+                "later"
+            ],
+            "responses": [
+                "Goodbye!",
+                "See you later!",
+                "Take care!",
+                "Bye!",
+                "Farewell!",
+                "Have a great day!",
+                "Catch you later!",
+                "Until next time!"
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "thanks",
+                "thank you",
+                "much appreciated",
+                "thanks a lot",
+                "thank you very much",
+                "thanks so much",
+                "I appreciate it",
+                "grateful",
+                "thanks a bunch",
+                "thanks a million"
+            ],
+            "responses": [
+                "You're welcome!",
+                "No problem!",
+                "My pleasure!",
+                "You're welcome, anytime!",
+                "Happy to help!",
+                "Don't mention it!",
+                "Glad I could assist!"
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": [
+                "help",
+                "I need help",
+                "can you help me?",
+                "assist me",
+                "I need assistance",
+                "can you assist me?",
+                "help me out",
+                "could you help me?"
+            ],
+            "responses": [
+                "Sure, how can I help you?",
+                "What do you need assistance with?",
+                "I'm here to help, tell me more.",
+                "How can I assist you today?",
+                "I'm happy to help, what do you need?"
+            ]
+        },
+        {
+            "tag": "weather",
+            "patterns": [
+                "what's the weather like?",
+                "how's the weather?",
+                "is it going to rain?",
+                "weather forecast",
+                "will it be sunny today?",
+                "what's the temperature?",
+                "is it cold outside?",
+                "do I need an umbrella?",
+                "what's the weather tomorrow?"
+            ],
+            "responses": [
+                "Let me check the weather for you.",
+                "Here's the weather forecast.",
+                "It looks like it's going to be sunny.",
+                "Expect some rain today.",
+                "It's quite cold outside, dress warmly.",
+                "You'll need an umbrella today.",
+                "The weather is looking great!",
+                "The temperature is quite high today."
+            ]
+        }
+    ]
+}
