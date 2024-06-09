@@ -109,15 +109,19 @@ def analyze_sentiment(text):
 
 def get_response(intents_list, intents_json, user_query):
     global last_recommended_movie
-
     if not intents_list:
-        return "I'm not sure how to respond to that."
+        return "I'm sorry, I don't understand."
 
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
     sentiment = analyze_sentiment(user_query)
+    
+    print(f"Detected tag: {tag}")  # Debugging: Print detected tag
+    print(f"Intents list: {intents_list}")  # Debugging: Print intents list
+    print(f"Intents JSON: {intents_json}")  # Debugging: Print intents JSON
+
     for i in list_of_intents:
-        if i['tag'] == tag:
+        if i.get('tag') == tag:
             if sentiment == "positive":
                 result = random.choice(i.get('positive_responses', i['responses']))
             elif sentiment == "negative":
@@ -125,13 +129,16 @@ def get_response(intents_list, intents_json, user_query):
             else:
                 result = random.choice(i.get('neutral_responses', i['responses']))
             break
+    else:
+        result = "I'm sorry, I don't understand."
     
+    # Movie details and IMDb rating handling
     if tag == "movie_details":
         movie_name = extract_movie_name(user_query)
         if movie_name:
-            result = movie_details[movie_name]
+            result = movie_details.get(movie_name, "I'm sorry, I don't have details about that movie.")
         elif last_recommended_movie:
-            result = movie_details[last_recommended_movie]
+            result = movie_details.get(last_recommended_movie, "I'm sorry, I don't have details about that movie.")
         else:
             result = "I'm sorry, I don't have details about that movie."
     elif tag == "imdb_rating":
@@ -162,6 +169,7 @@ def get_response(intents_list, intents_json, user_query):
                 break
 
     return result
+
 
 def chatbot_response(msg):
     ints = predict_class(msg, model)
