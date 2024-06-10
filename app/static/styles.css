@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 350px;
+    height: 600px; /* Fixed height for the chat container */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-box {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.user-message, .bot-message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.user-message {
+    background: #d1e7dd;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background: #f8f9fa;
+    align-self: flex-start;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+.quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.quick-reply {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.quick-reply:hover {
+    background: #0056b3;
+}
