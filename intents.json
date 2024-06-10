@@ -1,7 +1,7 @@
 {
     "intents": [
         {
-            "tag": "greetings",
+            "tag": "greeting",
             "patterns": [
                 "hello",
                 "hey",
@@ -31,6 +31,27 @@
                 "Good to see you!",
                 "Hello, how are you?",
                 "Hey there!"
+            ],
+            "positive_responses": [
+                "Hello! It's great to see you so positive!",
+                "Hi there! What can I do for you on this lovely day?",
+                "Hey! You seem happy today!",
+                "Hi! It's wonderful to see you in such a good mood!",
+                "Hello! Your positivity is infectious!"
+            ],
+            "neutral_responses": [
+                "Hello. How can I assist you today?",
+                "Hi. What can I help you with?",
+                "Hey. How's it going?",
+                "Hello. How may I assist you?",
+                "Hi. What's up?"
+            ],
+            "negative_responses": [
+                "Hello. I'm here to help if you're feeling down.",
+                "Hi there. How can I assist you today?",
+                "Hey. I'm here if you need to talk.",
+                "Hello. Let's see how I can help.",
+                "Hi. I'm here for you."
             ]
         },
         {
@@ -56,6 +77,27 @@
                 "Have a great day!",
                 "Catch you later!",
                 "Until next time!"
+            ],
+            "positive_responses": [
+                "Goodbye! Have a wonderful day!",
+                "See you later! Stay positive!",
+                "Take care! Keep smiling!",
+                "Goodbye! Have an amazing day!",
+                "See you later! Stay happy!"
+            ],
+            "neutral_responses": [
+                "Goodbye. Take care!",
+                "See you later. Have a good day!",
+                "Bye. Take care!",
+                "Goodbye. Have a nice day!",
+                "See you later. All the best!"
+            ],
+            "negative_responses": [
+                "Goodbye. I hope things get better for you.",
+                "Take care. If you need to talk, I'm here.",
+                "Bye. Stay strong.",
+                "Goodbye. I hope you feel better soon.",
+                "Take care. I'm here if you need anything."
             ]
         },
         {
@@ -103,28 +145,537 @@
             ]
         },
         {
-            "tag": "weather",
+            "tag": "recommend_movie",
             "patterns": [
-                "what's the weather like?",
-                "how's the weather?",
-                "is it going to rain?",
-                "weather forecast",
-                "will it be sunny today?",
-                "what's the temperature?",
-                "is it cold outside?",
-                "do I need an umbrella?",
-                "what's the weather tomorrow?"
+                "Can you recommend a movie?", 
+                "Suggest a movie", 
+                "Give me a movie recommendation", 
+                "What movie should I watch?", 
+                "Any good movies to recommend?",
+                "Do you recommend any movies?",
+                "I need a movie suggestion"
             ],
             "responses": [
-                "Let me check the weather for you.",
-                "Here's the weather forecast.",
-                "It looks like it's going to be sunny.",
-                "Expect some rain today.",
-                "It's quite cold outside, dress warmly.",
-                "You'll need an umbrella today.",
-                "The weather is looking great!",
-                "The temperature is quite high today."
+                "Of course! Do you have a preferred genre or theme?", 
+                "Sure! What genre are you interested in?", 
+                "Absolutely! What kind of movie are you in the mood for?", 
+                "What type of movies do you like? Action, comedy, romance?", 
+                "Sure! Tell me what kind of movie you're in the mood for."
+            ],
+            "positive_responses": [
+                "Absolutely! You seem excited! What genre are you in the mood for?", 
+                "Sure! With such a good mood, maybe a comedy? What do you think?", 
+                "Great! I can recommend something fun for you. What genre do you like?", 
+                "You're in high spirits! How about an uplifting movie?", 
+                "Awesome! Let's find a movie that matches your great mood. Any genre in mind?"
+            ],
+            "neutral_responses": [
+                "Sure! What genre are you interested in?", 
+                "Absolutely! What kind of movie are you in the mood for?", 
+                "What type of movies do you like? Action, comedy, romance?", 
+                "Sure! Tell me what kind of movie you're in the mood for.", 
+                "What genre of movies do you prefer?"
+            ],
+            "negative_responses": [
+                "I'm here to help. How about a comforting movie? Any genre in mind?", 
+                "I'm sorry to hear that. Maybe a feel-good movie? What genre do you prefer?", 
+                "Let's find something that might lift your spirits. What kind of movies do you like?", 
+                "Perhaps a heartwarming movie can cheer you up. What genre do you like?", 
+                "I understand. How about a movie to distract you? Any genre preferences?"
+            ]
+        },
+        {
+            "tag": "recommend_action",
+            "patterns": [
+                "Recommend an action movie", 
+                "Suggest an action movie", 
+                "I want to watch an action movie", 
+                "Any good action movies?", 
+                "What's a good action movie to watch?"
+            ],
+            "responses": [
+                "How about 'Mad Max: Fury Road'? It's packed with action!", 
+                "You might enjoy 'John Wick'. It's a great action movie.", 
+                "'Die Hard' is a classic action film you can't miss!", 
+                "'The Dark Knight' is an excellent choice for action fans.", 
+                "'Gladiator' is another great action movie to watch."
+            ],
+            "positive_responses": [
+                "You're in for some thrills! How about 'Mad Max: Fury Road'? It's packed with action!", 
+                "Feeling adventurous? 'John Wick' is a great choice!", 
+                "'Die Hard' is an action-packed classic you must see!", 
+                "For an intense experience, try 'The Dark Knight'.", 
+                "'Gladiator' will keep your adrenaline pumping!"
+            ],
+            "neutral_responses": [
+                "How about 'Mad Max: Fury Road'? It's packed with action!", 
+                "'John Wick' is a solid choice for action fans.", 
+                "'Die Hard' is a classic action film you can't miss!", 
+                "'The Dark Knight' is an excellent choice for action fans.", 
+                "'Gladiator' is a great action movie to watch."
+            ],
+            "negative_responses": [
+                "Maybe an intense movie can get your mind off things. 'Mad Max: Fury Road' is a great pick.", 
+                "How about 'John Wick'? It's action-packed and gripping.", 
+                "'Die Hard' might be the distraction you need. It's a classic action film.", 
+                "'The Dark Knight' is an excellent choice for action fans.", 
+                "Try 'Gladiator' for a thrilling experience."
+            ]
+        },
+        {
+            "tag": "recommend_comedy",
+            "patterns": [
+                "Recommend a comedy movie", 
+                "Suggest a comedy movie", 
+                "I want to watch a comedy", 
+                "Any good comedy movies?", 
+                "What's a funny movie to watch?"
+            ],
+            "responses": [
+                "'Superbad' is a hilarious comedy. You should check it out!", 
+                "'The Hangover' is a classic comedy you might enjoy.", 
+                "'Step Brothers' is a fun comedy to watch.", 
+                "'Anchorman' will surely make you laugh."
+            ],
+            "positive_responses": [
+                "'Superbad' is a hilarious comedy. You should check it out! It will keep you laughing!", 
+                "'The Hangover' is a classic comedy you might enjoy. Perfect for your mood!", 
+                "'Step Brothers' is a fun comedy to watch when you're feeling upbeat!", 
+                "'Anchorman' will surely make you laugh and keep the good vibes going!", 
+                "'Bridesmaids' is another comedy that will match your great mood!"
+            ],
+            "neutral_responses": [
+                "'Superbad' is a hilarious comedy. You should check it out!", 
+                "'The Hangover' is a classic comedy you might enjoy.", 
+                "'Step Brothers' is a fun comedy to watch.", 
+                "'Anchorman' will surely make you laugh.", 
+                "'Bridesmaids' is a comedy that many people enjoy."
+            ],
+            "negative_responses": [
+                "'Superbad' is a hilarious comedy. It might lift your spirits!", 
+                "'The Hangover' is a classic comedy that could cheer you up.", 
+                "'Step Brothers' is a fun comedy to watch when you need a laugh.", 
+                "'Anchorman' will surely make you laugh and forget your worries!", 
+                "'Bridesmaids' is a feel-good comedy that might help improve your mood."
+            ]
+        },
+        {
+            "tag": "recommend_romance",
+            "patterns": [
+                "Recommend a romance movie", 
+                "Suggest a romance movie", 
+                "I want to watch a romance movie", 
+                "Any good romance movies?", 
+                "What's a romantic movie to watch?"
+            ],
+            "responses": [
+                "'The Notebook' is a beautiful romance movie.", 
+                "'Pride and Prejudice' is a great choice for romance.", 
+                "'La La Land' is a modern romantic classic.", 
+                "'Titanic' is a timeless romance film."
+            ],
+            "positive_responses": [
+                "'The Notebook' is a beautiful romance movie that matches your happy mood.", 
+                "'Pride and Prejudice' is a great choice for romance. Enjoy!", 
+                "'La La Land' is a modern romantic classic, perfect for your mood.", 
+                "'Titanic' is a timeless romance film that will complement your positive vibes.", 
+                "'Before Sunrise' is another romantic movie that fits your mood well."
+            ],
+            "neutral_responses": [
+                "'The Notebook' is a beautiful romance movie.", 
+                "'Pride and Prejudice' is a great choice for romance.", 
+                "'La La Land' is a modern romantic classic.", 
+                "'Titanic' is a timeless romance film.", 
+                "'Before Sunrise' is a romantic movie many people enjoy."
+            ],
+            "negative_responses": [
+                "'The Notebook' is a beautiful romance movie that might comfort you.", 
+                "'Pride and Prejudice' is a great choice for romance, and it might lift your spirits.", 
+                "'La La Land' is a modern romantic classic that could cheer you up.", 
+                "'Titanic' is a timeless romance film that might help you feel better.", 
+                "'Before Sunrise' is a heartwarming romantic movie that could improve your mood."
+            ]
+        },
+        {
+            "tag": "recommend_sci_fi",
+            "patterns": [
+                "Recommend a sci-fi movie", 
+                "Suggest a science fiction movie", 
+                "I want to watch a sci-fi movie", 
+                "Any good sci-fi movies?", 
+                "What's a good sci-fi movie to watch?"
+            ],
+            "responses": [
+                "'Inception' is an amazing sci-fi movie. Highly recommended!", 
+                "'Interstellar' is a must-watch for sci-fi fans.", 
+                "'The Matrix' is a groundbreaking sci-fi film.", 
+                "'Blade Runner 2049' is a visually stunning sci-fi movie."
+            ],
+            "positive_responses": [
+                "'Inception' is an amazing sci-fi movie. Highly recommended for your great mood!", 
+                "'Interstellar' is a must-watch for sci-fi fans. You'll love it!", 
+                "'The Matrix' is a groundbreaking sci-fi film that matches your positive energy.", 
+                "'Blade Runner 2049' is visually stunning and perfect for your mood.", 
+                "'Guardians of the Galaxy' is a fun sci-fi movie that fits your happy vibes."
+            ],
+            "neutral_responses": [
+                "'Inception' is an amazing sci-fi movie. Highly recommended!", 
+                "'Interstellar' is a must-watch for sci-fi fans.", 
+                "'The Matrix' is a groundbreaking sci-fi film.", 
+                "'Blade Runner 2049' is a visually stunning sci-fi movie.", 
+                "'Guardians of the Galaxy' is a popular sci-fi movie many people enjoy."
+            ],
+            "negative_responses": [
+                "'Inception' is an amazing sci-fi movie that might take your mind off things.", 
+                "'Interstellar' is a must-watch for sci-fi fans and might cheer you up.", 
+                "'The Matrix' is a groundbreaking sci-fi film that could distract you.", 
+                "'Blade Runner 2049' is visually stunning and might improve your mood.", 
+                "'Guardians of the Galaxy' is a fun sci-fi movie that could lift your spirits."
+            ]
+        },
+        {
+            "tag": "recommend_horror",
+            "patterns": [
+                "Recommend a horror movie", 
+                "Suggest a horror movie", 
+                "I want to watch a horror movie", 
+                "Any good horror movies?", 
+                "What's a scary movie to watch?"
+            ],
+            "responses": [
+                "'The Conjuring' is a terrifying horror movie.", 
+                "'Get Out' is a critically acclaimed horror film.", 
+                "'Hereditary' is a chilling horror movie.", 
+                "'A Quiet Place' is a suspenseful horror film."
+            ],
+            "positive_responses": [
+                "'The Conjuring' is a terrifying horror movie, perfect for your adventurous mood.", 
+                "'Get Out' is a critically acclaimed horror film that matches your excitement.", 
+                "'Hereditary' is a chilling horror movie that will keep you on the edge of your seat.", 
+                "'A Quiet Place' is a suspenseful horror film, ideal for your thrill-seeking mood.", 
+                "'It' is another great horror movie that fits your positive energy."
+            ],
+            "neutral_responses": [
+                "'The Conjuring' is a terrifying horror movie.", 
+                "'Get Out' is a critically acclaimed horror film.", 
+                "'Hereditary' is a chilling horror movie.", 
+                "'A Quiet Place' is a suspenseful horror film.", 
+                "'It' is a popular horror movie many people enjoy."
+            ],
+            "negative_responses": [
+                "'The Conjuring' is a terrifying horror movie that might take your mind off things.", 
+                "'Get Out' is a critically acclaimed horror film that could distract you.", 
+                "'Hereditary' is a chilling horror movie that might improve your mood.", 
+                "'A Quiet Place' is a suspenseful horror film that could help you feel better.", 
+                "'It' is a horror movie that might help you escape reality for a bit."
+            ]
+        },
+        {
+            "tag": "recommend_drama",
+            "patterns": [
+                "Recommend a drama movie", 
+                "Suggest a drama movie", 
+                "I want to watch a drama movie", 
+                "Any good drama movies?", 
+                "What's a good drama movie to watch?"
+            ],
+            "responses": [
+                "'The Shawshank Redemption' is an outstanding drama.", 
+                "'Forrest Gump' is a heartwarming drama movie.", 
+                "'The Godfather' is a classic drama film.", 
+                "'Fight Club' is a thought-provoking drama."
+            ],
+            "positive_responses": [
+                "'The Shawshank Redemption' is an outstanding drama, perfect for your mood.",
+                "'Forrest Gump' is a heartwarming drama that matches your positive energy.",
+                "'The Godfather' is a classic drama film, ideal for your great mood.",
+                "'Fight Club' is a thought-provoking drama that fits your mindset.",
+                "'A Beautiful Mind' is another drama that matches your positive vibes."
+            ],
+            "neutral_responses": [
+                "'The Shawshank Redemption' is an outstanding drama.",
+                "'Forrest Gump' is a heartwarming drama movie.",
+                "'The Godfather' is a classic drama film.",
+                "'Fight Club' is a thought-provoking drama.",
+                "'A Beautiful Mind' is a drama that many people enjoy."
+            ],
+            "negative_responses": [
+                "'The Shawshank Redemption' is an outstanding drama that might comfort you.",
+                "'Forrest Gump' is a heartwarming drama that could lift your spirits.",
+                "'The Godfather' is a classic drama film that might distract you.",
+                "'Fight Club' is a thought-provoking drama that could improve your mood.",
+                "'A Beautiful Mind' is a drama that might help you feel better."
+            ]
+        },
+        {
+            "tag": "recommend_animation",
+            "patterns": [
+                "Recommend an animated movie", 
+                "Suggest an animated movie", 
+                "I want to watch an animated movie", 
+                "Any good animated movies?", 
+                "What's a good animated movie to watch?"
+            ],
+            "responses": [
+                "'Toy Story' is a fantastic animated movie.", 
+                "'Spirited Away' is a beautiful animated film.", 
+                "'Finding Nemo' is a delightful animated movie.", 
+                "'The Lion King' is a classic animated film."
+            ],
+            "positive_responses": [
+                "'Toy Story' is a fantastic animated movie, perfect for your great mood!",
+                "'Spirited Away' is a beautiful animated film that matches your positive energy.",
+                "'Finding Nemo' is a delightful animated movie that fits your happy vibes.",
+                "'The Lion King' is a classic animated film, ideal for your mood.",
+                "'Up' is another animated movie that will keep your spirits high."
+            ],
+            "neutral_responses": [
+                "'Toy Story' is a fantastic animated movie.",
+                "'Spirited Away' is a beautiful animated film.",
+                "'Finding Nemo' is a delightful animated movie.",
+                "'The Lion King' is a classic animated film.",
+                "'Up' is a popular animated movie many people enjoy."
+            ],
+            "negative_responses": [
+                "'Toy Story' is a fantastic animated movie that might lift your spirits.",
+                "'Spirited Away' is a beautiful animated film that could cheer you up.",
+                "'Finding Nemo' is a delightful animated movie that might improve your mood.",
+                "'The Lion King' is a classic animated film that might help you feel better.",
+                "'Up' is a heartwarming animated movie that could help you feel better."
+            ]
+        },
+        {
+            "tag": "movie_details",
+            "patterns": [
+                "Tell me about 'Inception'", 
+                "What is 'The Matrix' about?", 
+                "Details about 'Titanic'", 
+                "What's the plot of 'Interstellar'?", 
+                "Can you describe 'The Godfather'?"
+            ],
+            "responses": [
+                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others.", 
+                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality.", 
+                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic.", 
+                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet.", 
+                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone."
+            ],
+            "positive_responses": [
+                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others. It's perfect for your curious mood!",
+                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality. A great choice for your adventurous mood!",
+                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic. Ideal for your great mood!",
+                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet. Perfect for your mindset!",
+                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone. A classic film for your mood!"
+            ],
+            "neutral_responses": [
+                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others.",
+                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality.",
+                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic.",
+                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet.",
+                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone."
+            ],
+            "negative_responses": [
+                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others. It might distract you from your worries.",
+                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality. It might help you escape reality for a bit.",
+                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic. It might help you feel better.",
+                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet. It might lift your spirits.",
+                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone. It might improve your mood."
+            ]
+        },
+        {
+            "tag": "mood_recommendation",
+            "patterns": [
+                "I feel happy, recommend a movie", 
+                "Suggest a movie for when I'm sad", 
+                "I'm bored, what should I watch?", 
+                "What's a good movie for a fun mood?", 
+                "Recommend a movie for a gloomy day"
+            ],
+            "responses": [
+                "If you're happy, you might enjoy 'The Grand Budapest Hotel'. It's a fun movie!", 
+                "Feeling sad? 'Up' is a heartwarming movie that might cheer you up.", 
+                "Bored? 'Guardians of the Galaxy' is an entertaining watch.", 
+                "For a fun mood, 'Ferris Bueller's Day Off' is perfect.", 
+                "On a gloomy day, 'The Pursuit of Happyness' is an uplifting choice."
+            ],
+            "positive_responses": [
+                "If you're happy, you might enjoy 'The Grand Budapest Hotel'. It's a fun movie that matches your mood!",
+                "'Up' is a heartwarming movie that will keep your positive vibes going!",
+                "'Guardians of the Galaxy' is an entertaining watch, perfect for your great mood!",
+                "'Ferris Bueller's Day Off' is perfect for your fun mood!",
+                "'The Pursuit of Happyness' is an uplifting choice for your happy mood."
+            ],
+            "neutral_responses": [
+                "If you're happy, you might enjoy 'The Grand Budapest Hotel'. It's a fun movie!",
+                "Feeling sad? 'Up' is a heartwarming movie that might cheer you up.",
+                "Bored? 'Guardians of the Galaxy' is an entertaining watch.",
+                "For a fun mood, 'Ferris Bueller's Day Off' is perfect.",
+                "On a gloomy day, 'The Pursuit of Happyness' is an uplifting choice."
+            ],
+            "negative_responses": [
+                "Feeling sad? 'Up' is a heartwarming movie that might cheer you up.",
+                "On a gloomy day, 'The Pursuit of Happyness' is an uplifting choice.",
+                "Bored? 'Guardians of the Galaxy' is an entertaining watch that might lift your spirits.",
+                "'Ferris Bueller's Day Off' is a fun movie that could improve your mood.",
+                "'The Grand Budapest Hotel' is a fun movie that might help you feel better."
+            ]
+        },
+
+        {
+            "tag": "capabilities",
+            "patterns": [
+                "What can I ask you?",
+                "What are your capabilities?",
+                "What do you know?",
+                "How can you help me?",
+                "Tell me what you can do",
+                "What can you assist with?",
+                "What questions can I ask?",
+                "What services do you offer?",
+                "What topics can we discuss?",
+                "How can you assist me?",
+                "What information can you provide?",
+                "What can you help me with?",
+                "What do you specialize in?",
+                "What areas can you cover?",
+                "What can you tell me?",
+                "What expertise do you have?",
+                "What advice can you give?",
+                "What are you able to do?",
+                "What can you do for me?",
+                "How can you support me?"
+            ],
+            "responses": [
+                "I can recommend movies based on genre or mood.",
+                "I can provide details about specific movies.",
+                "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies.",
+                "I can answer questions about various movie genres.",
+                "I can help you find the perfect movie for any occasion.",
+                "I can give you information about popular films.",
+                "I can recommend movies based on your preferences.",
+                "I can suggest movies for different moods.",
+                "I can provide summaries of movie plots.",
+                "I can assist with finding a good movie to watch.",
+                "I can help you discover new movies.",
+                "I can provide information about movie genres.",
+                "I can offer movie recommendations tailored to your tastes.",
+                "I can tell you about the latest popular movies.",
+                "I can suggest classic films in various genres.",
+                "I can give you a list of top-rated movies.",
+                "I can recommend movies for family, friends, or solo watching.",
+                "I can help you choose a movie for a specific mood.",
+                "I can provide details on movie cast and crew.",
+                "I can assist with finding critically acclaimed films."
+            ],
+            "positive_responses": [
+                "I can recommend movies based on genre or mood. Let's find something fun for you!",
+                "I can provide details about specific movies.",
+                "I can provide details about specific movies. Excited to share some great options!",
+                "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies. Happy to help!",
+                "I can answer questions about various movie genres. Let's explore some amazing films!",
+                "I can help you find the perfect movie for any occasion. Can't wait to get started!"
+            ],
+            "neutral_responses": [
+                "I can recommend movies based on genre or mood.",
+                "I can provide details about specific movies.",
+                "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies.",
+                "I can answer questions about various movie genres.",
+                "I can help you find the perfect movie for any occasion."
+            ],
+            "negative_responses": [
+                "I can recommend movies based on genre or mood. Let's find something to lift your spirits.",
+                "I can provide details about specific movies. Hopefully, we can find something to cheer you up.",
+                "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies. Let's find something enjoyable.",
+                "I can answer questions about various movie genres. Maybe we can find something to brighten your day.",
+                "I can help you find the perfect movie for any occasion. Let's look for something that might improve your mood."
+            ]
+        },
+        {
+            "tag": "movie_details",
+            "patterns": [
+                "Tell me about [movie name]",
+                "What is [movie name] about?",
+                "Give me details about [movie name]",
+                "What's the plot of [movie name]?",
+                "Describe [movie name]",
+                "Can you explain the story of [movie name]?",
+                "I want to know about [movie name]",
+                "What happens in [movie name]?",
+                "Summarize [movie name]",
+                "Give me a brief about [movie name]",
+                "What is the main plot of [movie name]?",
+                "Can you tell me the storyline of [movie name]?",
+                "What is the background of [movie name]?",
+                "Explain [movie name]",
+                "I need a summary of [movie name]",
+                "What is the theme of [movie name]?",
+                "What is the setting of [movie name]?",
+                "Tell me the key points of [movie name]",
+                "Give me an overview of [movie name]",
+                "I want a description of [movie name]"
+            ],
+            "responses": [
+                "Here are the details of the movie you asked about."
+            ],
+            "positive_responses": [
+                "Here's an exciting detail about the movie you asked about! You're going to love it!",
+                "Here are the interesting details of the movie you asked about! Perfect for your mood!",
+                "Let me tell you more about this fantastic movie! You're in for a treat!",
+                "You'll love the details about this movie! It's a great choice for your mood!",
+                "Here's a thrilling summary of the movie you asked about! Enjoy!"
+            ],
+            "neutral_responses": [
+                "Here are the details of the movie you asked about.",
+                "Let me provide you with the information about this movie.",
+                "Here's a summary of the movie you asked about.",
+                "Here's what the movie is about.",
+                "These are the key points of the movie you asked about."
+            ],
+            "negative_responses": [
+                "Here are the details of the movie you asked about. Hope it takes your mind off things.",
+                "Let me provide you with the information about this movie. Maybe it'll cheer you up.",
+                "Here's a summary of the movie you asked about. Hope it helps improve your mood.",
+                "Here's what the movie is about. It might help distract you for a while.",
+                "These are the key points of the movie you asked about. I hope it brings some comfort."
+            ]
+        },
+        {
+            "tag": "imdb_rating",
+            "patterns": [
+                "What is the IMDb rating of [movie name]?",
+                "Tell me the IMDb rating of [movie name]",
+                "IMDb rating of [movie name]",
+                "What rating does [movie name] have on IMDb?",
+                "How is [movie name] rated on IMDb?",
+                "Give me the IMDb score for [movie name]"
+            ],
+            "responses": [
+                "Let me check the IMDb rating for you."
+            ],
+            "positive_responses": [
+                "Let me check the IMDb rating for you! You're going to love what you see!",
+                "I'll find the IMDb rating for you. It's going to be impressive!",
+                "Checking the IMDb rating now. You're in for a treat!",
+                "I'll look up the IMDb rating for you. It's highly rated!",
+                "Let's see the IMDb rating. You're going to be pleased!"
+            ],
+            "neutral_responses": [
+                "Let me check the IMDb rating for you.",
+                "I'll find the IMDb rating for you.",
+                "Checking the IMDb rating now.",
+                "I'll look up the IMDb rating for you.",
+                "Let's see the IMDb rating."
+            ],
+            "negative_responses": [
+                "Let me check the IMDb rating for you. Hopefully, it cheers you up.",
+                "I'll find the IMDb rating for you. It might be a good distraction.",
+                "Checking the IMDb rating now. Hope it helps brighten your day.",
+                "I'll look up the IMDb rating for you. It might help you feel better.",
+                "Let's see the IMDb rating. Hopefully, it's a pleasant surprise."
             ]
         }
     ]
 }
+        
+
+
