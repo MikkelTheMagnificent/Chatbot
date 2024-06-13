@@ -21,17 +21,6 @@
                 "yo",
                 "hi there"
             ],
-            "responses": [
-                "Hello!",
-                "Hey!",
-                "What can I do for you?",
-                "Hi there!",
-                "Greetings!",
-                "How can I assist you today?",
-                "Good to see you!",
-                "Hello, how are you?",
-                "Hey there!"
-            ],
             "positive_responses": [
                 "Hello! It's great to see you so positive!",
                 "Hi there! What can I do for you on this lovely day?",
@@ -67,16 +56,6 @@
                 "bye bye",
                 "until next time",
                 "later"
-            ],
-            "responses": [
-                "Goodbye!",
-                "See you later!",
-                "Take care!",
-                "Bye!",
-                "Farewell!",
-                "Have a great day!",
-                "Catch you later!",
-                "Until next time!"
             ],
             "positive_responses": [
                 "Goodbye! Have a wonderful day!",
@@ -114,7 +93,16 @@
                 "thanks a bunch",
                 "thanks a million"
             ],
-            "responses": [
+            "positive_responses": [
+                "You're welcome! I'm glad I could help!",
+                "No problem! Your positivity is contagious!",
+                "My pleasure! Have a fantastic day!",
+                "You're welcome, anytime! Keep smiling!",
+                "Happy to help! Stay positive!",
+                "Don't mention it! Your gratitude is appreciated!",
+                "Glad I could assist! Keep up the good vibes!"
+            ],
+            "neutral_responses": [
                 "You're welcome!",
                 "No problem!",
                 "My pleasure!",
@@ -122,6 +110,15 @@
                 "Happy to help!",
                 "Don't mention it!",
                 "Glad I could assist!"
+            ],
+            "negative_responses": [
+                "You're welcome. I hope things get better.",
+                "No problem. Hang in there.",
+                "My pleasure. I'm here if you need more help.",
+                "You're welcome, anytime. I hope this helps.",
+                "Happy to help. Take care.",
+                "Don't mention it. I'm here for you.",
+                "Glad I could assist. Let me know if there's anything else I can do."
             ]
         },
         {
@@ -136,12 +133,26 @@
                 "help me out",
                 "could you help me?"
             ],
-            "responses": [
+            "positive_responses": [
+                "Sure, how can I help you? Your enthusiasm is great!",
+                "What do you need assistance with? I'm here and ready to help!",
+                "I'm here to help, tell me more. Your positive attitude is inspiring!",
+                "How can I assist you today? Let's solve this together!",
+                "I'm happy to help, what do you need? Your optimism is wonderful!"
+            ],
+            "neutral_responses": [
                 "Sure, how can I help you?",
                 "What do you need assistance with?",
                 "I'm here to help, tell me more.",
                 "How can I assist you today?",
                 "I'm happy to help, what do you need?"
+            ],
+            "negative_responses": [
+                "Sure, how can I help you? I'm here for you.",
+                "What do you need assistance with? Let's tackle this together.",
+                "I'm here to help, tell me more. We'll get through this.",
+                "How can I assist you today? I'm ready to help.",
+                "I'm happy to help, what do you need? Don't worry, we'll sort this out."
             ]
         },
         {
@@ -154,13 +165,6 @@
                 "Any good movies to recommend?",
                 "Do you recommend any movies?",
                 "I need a movie suggestion"
-            ],
-            "responses": [
-                "Of course! Do you have a preferred genre or theme?", 
-                "Sure! What genre are you interested in?", 
-                "Absolutely! What kind of movie are you in the mood for?", 
-                "What type of movies do you like? Action, comedy, romance?", 
-                "Sure! Tell me what kind of movie you're in the mood for."
             ],
             "positive_responses": [
                 "Absolutely! You seem excited! What genre are you in the mood for?", 
@@ -193,13 +197,6 @@
                 "Any good action movies?", 
                 "What's a good action movie to watch?"
             ],
-            "responses": [
-                "How about 'Mad Max: Fury Road'? It's packed with action!", 
-                "You might enjoy 'John Wick'. It's a great action movie.", 
-                "'Die Hard' is a classic action film you can't miss!", 
-                "'The Dark Knight' is an excellent choice for action fans.", 
-                "'Gladiator' is another great action movie to watch."
-            ],
             "positive_responses": [
                 "You're in for some thrills! How about 'Mad Max: Fury Road'? It's packed with action!", 
                 "Feeling adventurous? 'John Wick' is a great choice!", 
@@ -230,12 +227,6 @@
                 "I want to watch a comedy", 
                 "Any good comedy movies?", 
                 "What's a funny movie to watch?"
-            ],
-            "responses": [
-                "'Superbad' is a hilarious comedy. You should check it out!", 
-                "'The Hangover' is a classic comedy you might enjoy.", 
-                "'Step Brothers' is a fun comedy to watch.", 
-                "'Anchorman' will surely make you laugh."
             ],
             "positive_responses": [
                 "'Superbad' is a hilarious comedy. You should check it out! It will keep you laughing!", 
@@ -268,12 +259,6 @@
                 "Any good romance movies?", 
                 "What's a romantic movie to watch?"
             ],
-            "responses": [
-                "'The Notebook' is a beautiful romance movie.", 
-                "'Pride and Prejudice' is a great choice for romance.", 
-                "'La La Land' is a modern romantic classic.", 
-                "'Titanic' is a timeless romance film."
-            ],
             "positive_responses": [
                 "'The Notebook' is a beautiful romance movie that matches your happy mood.", 
                 "'Pride and Prejudice' is a great choice for romance. Enjoy!", 
@@ -304,12 +289,6 @@
                 "I want to watch a sci-fi movie", 
                 "Any good sci-fi movies?", 
                 "What's a good sci-fi movie to watch?"
-            ],
-            "responses": [
-                "'Inception' is an amazing sci-fi movie. Highly recommended!", 
-                "'Interstellar' is a must-watch for sci-fi fans.", 
-                "'The Matrix' is a groundbreaking sci-fi film.", 
-                "'Blade Runner 2049' is a visually stunning sci-fi movie."
             ],
             "positive_responses": [
                 "'Inception' is an amazing sci-fi movie. Highly recommended for your great mood!", 
@@ -342,12 +321,6 @@
                 "Any good horror movies?", 
                 "What's a scary movie to watch?"
             ],
-            "responses": [
-                "'The Conjuring' is a terrifying horror movie.", 
-                "'Get Out' is a critically acclaimed horror film.", 
-                "'Hereditary' is a chilling horror movie.", 
-                "'A Quiet Place' is a suspenseful horror film."
-            ],
             "positive_responses": [
                 "'The Conjuring' is a terrifying horror movie, perfect for your adventurous mood.", 
                 "'Get Out' is a critically acclaimed horror film that matches your excitement.", 
@@ -378,12 +351,6 @@
                 "I want to watch a drama movie", 
                 "Any good drama movies?", 
                 "What's a good drama movie to watch?"
-            ],
-            "responses": [
-                "'The Shawshank Redemption' is an outstanding drama.", 
-                "'Forrest Gump' is a heartwarming drama movie.", 
-                "'The Godfather' is a classic drama film.", 
-                "'Fight Club' is a thought-provoking drama."
             ],
             "positive_responses": [
                 "'The Shawshank Redemption' is an outstanding drama, perfect for your mood.",
@@ -416,12 +383,6 @@
                 "Any good animated movies?", 
                 "What's a good animated movie to watch?"
             ],
-            "responses": [
-                "'Toy Story' is a fantastic animated movie.", 
-                "'Spirited Away' is a beautiful animated film.", 
-                "'Finding Nemo' is a delightful animated movie.", 
-                "'The Lion King' is a classic animated film."
-            ],
             "positive_responses": [
                 "'Toy Story' is a fantastic animated movie, perfect for your great mood!",
                 "'Spirited Away' is a beautiful animated film that matches your positive energy.",
@@ -453,13 +414,6 @@
                 "What's the plot of 'Interstellar'?", 
                 "Can you describe 'The Godfather'?"
             ],
-            "responses": [
-                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others.", 
-                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality.", 
-                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic.", 
-                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet.", 
-                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone."
-            ],
             "positive_responses": [
                 "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others. It's perfect for your curious mood!",
                 "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality. A great choice for your adventurous mood!",
@@ -490,13 +444,6 @@
                 "I'm bored, what should I watch?", 
                 "What's a good movie for a fun mood?", 
                 "Recommend a movie for a gloomy day"
-            ],
-            "responses": [
-                "If you're happy, you might enjoy 'The Grand Budapest Hotel'. It's a fun movie!", 
-                "Feeling sad? 'Up' is a heartwarming movie that might cheer you up.", 
-                "Bored? 'Guardians of the Galaxy' is an entertaining watch.", 
-                "For a fun mood, 'Ferris Bueller's Day Off' is perfect.", 
-                "On a gloomy day, 'The Pursuit of Happyness' is an uplifting choice."
             ],
             "positive_responses": [
                 "If you're happy, you might enjoy 'The Grand Budapest Hotel'. It's a fun movie that matches your mood!",
@@ -545,28 +492,6 @@
                 "What can you do for me?",
                 "How can you support me?"
             ],
-            "responses": [
-                "I can recommend movies based on genre or mood.",
-                "I can provide details about specific movies.",
-                "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies.",
-                "I can answer questions about various movie genres.",
-                "I can help you find the perfect movie for any occasion.",
-                "I can give you information about popular films.",
-                "I can recommend movies based on your preferences.",
-                "I can suggest movies for different moods.",
-                "I can provide summaries of movie plots.",
-                "I can assist with finding a good movie to watch.",
-                "I can help you discover new movies.",
-                "I can provide information about movie genres.",
-                "I can offer movie recommendations tailored to your tastes.",
-                "I can tell you about the latest popular movies.",
-                "I can suggest classic films in various genres.",
-                "I can give you a list of top-rated movies.",
-                "I can recommend movies for family, friends, or solo watching.",
-                "I can help you choose a movie for a specific mood.",
-                "I can provide details on movie cast and crew.",
-                "I can assist with finding critically acclaimed films."
-            ],
             "positive_responses": [
                 "I can recommend movies based on genre or mood. Let's find something fun for you!",
                 "I can provide details about specific movies.",
@@ -614,9 +539,6 @@
                 "Give me an overview of [movie name]",
                 "I want a description of [movie name]"
             ],
-            "responses": [
-                "Here are the details of the movie you asked about."
-            ],
             "positive_responses": [
                 "Here's an exciting detail about the movie you asked about! You're going to love it!",
                 "Here are the interesting details of the movie you asked about! Perfect for your mood!",
@@ -648,9 +570,6 @@
                 "What rating does [movie name] have on IMDb?",
                 "How is [movie name] rated on IMDb?",
                 "Give me the IMDb score for [movie name]"
-            ],
-            "responses": [
-                "Let me check the IMDb rating for you."
             ],
             "positive_responses": [
                 "Let me check the IMDb rating for you! You're going to love what you see!",

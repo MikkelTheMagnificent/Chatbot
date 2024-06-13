@@ -5,11 +5,13 @@ import pickle
 import requests
 import numpy as np
 import nltk
+import spacy
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from flask import Flask, request, jsonify, render_template
-import spacy
+from textblob import TextBlob
+
 
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -28,6 +30,18 @@ model = load_model('chatbot_model.h5')
 # Global variables
 conversation_history = []
 last_recommended_movie = "" #Track the last recommended movie
+sentiment_scores_history = [] # Track sentiment scores
+
+# Add custom words and their sentiment scores
+new_words = {
+    'hate': -3.0,
+    'horrible': -2.5,
+    'terrible': -2.5,
+    'dislike': -2.0,
+    'not good': -2.0,
+}
+
+analyzer.lexicon.update(new_words)
 
 # List of movie names
 movie_names = [
@@ -38,7 +52,7 @@ movie_names = [
     "the conjuring", "get out", "hereditary", "a quiet place"
 ]
 
-# Movie details dictionary (keeping your movie details here)
+# Movie details dictionary 
 movie_details = {
     "mad max: fury road": "'Mad Max: Fury Road' is a post-apocalyptic action film directed by George Miller. Set in a desert wasteland where water and gasoline are scarce, it follows Max Rockatansky who is captured by Immortan Joe's War Boys. Along with rebel warrior Furiosa, Max tries to escape Joe's tyrannical rule. The film is known for its high-octane action sequences, stunning visuals, and intense performances.",
     "john wick": "'John Wick' is an action-thriller film starring Keanu Reeves. It follows John Wick, a retired hitman seeking vengeance for the murder of his dog, a final gift from his deceased wife. The movie delves deep into the criminal underworld and is renowned for its stylized action sequences, choreographed fights, and the stoic performance of Reeves.",
@@ -63,7 +77,7 @@ movie_details = {
 }
 
 def get_imdb_rating(movie_name):
-    api_key = "bba2887f"  # Your OMDb API key
+    api_key = "bba2887f"  # OMDb API key
     url = f"http://www.omdbapi.com/?t={movie_name}&apikey={api_key}"
     try:
         response = requests.get(url, timeout=5)  # Set a timeout for the request
@@ -104,7 +118,9 @@ def predict_class(sentence, model):
         return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
     return return_list
 
-
+#################################################################################
+                            # Entity recognition
+#################################################################################
 def recognize_entities(text):
     entities = {'movies': []}
     for movie in movie_names:
@@ -114,8 +130,6 @@ def recognize_entities(text):
     return entities['movies']
 
 
-
-
 def extract_movie_name(sentence):
     movie_names_list = recognize_entities(sentence)  # Returns a list of movie names
     print(f"Extracted movie names: {movie_names_list}")  # Debugging statement
@@ -123,23 +137,52 @@ def extract_movie_name(sentence):
         if movie_name in movie_details:
             return movie_name
     return ""
-
-
-
-
-
+#################################################################################
+                            # Sentiment analyser
+#################################################################################
 def analyze_sentiment(text, previous_sentiment=None):
-    sentiment = analyzer.polarity_scores(text)
-    current_sentiment = "positive" if sentiment['compound'] > 0.6 else "negative" if sentiment['compound'] < -0.6 else "neutral"
-    
+    # VADER analysis
+    sentiment_vader_scores = analyzer.polarity_scores(text)
+    compound = sentiment_vader_scores['compound']
+    if compound > 0.2:
+        sentiment_vader = "positive"
+    elif compound < -0.2:
+        sentiment_vader = "negative"
+    else:
+        sentiment_vader = "neutral"
+
+    # TextBlob analysis
+    analysis = TextBlob(text)
+    sentiment_tb_score = analysis.sentiment.polarity
+    if sentiment_tb_score > 0.1:
+        sentiment_tb = "positive"
+    elif sentiment_tb_score < -0.1:
+        sentiment_tb = "negative"
+    else:
+        sentiment_tb = "neutral"
+
+    # Combining both
+    if sentiment_vader == sentiment_tb:
+        current_sentiment = sentiment_vader
+    else:
+        # If sentiments differ, combine both scores for a final decision
+        combined_score = compound + sentiment_tb_score
+        if combined_score > 0.1:
+            current_sentiment = "positive"
+        elif combined_score < -0.1:
+            current_sentiment = "negative"
+        else:
+            current_sentiment = "neutral"
+
     if previous_sentiment:
         print(f"Went from {previous_sentiment} to {current_sentiment}")
     else:
         print(f"Sentiment detected: {current_sentiment}")
-    
-    return current_sentiment, sentiment
+
+    return current_sentiment, sentiment_vader_scores
 
 
+#################################################################################
 
 def get_response(intents_list, intents_json, user_query, previous_sentiment):
     global last_recommended_movie
@@ -154,11 +197,11 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
         for i in intents_json['intents']:
             if i['tag'] == tag:
                 if sentiment == "positive":
-                    response = random.choice(i.get('positive_responses', i['responses']))
+                    response = random.choice(i.get('positive_responses', []))
                 elif sentiment == "negative":
-                    response = random.choice(i.get('negative_responses', i['responses']))
+                    response = random.choice(i.get('negative_responses', []))
                 else:
-                    response = random.choice(i.get('neutral_responses', i['responses']))
+                    response = random.choice(i.get('neutral_responses', []))
 
                 # If this is a recommendation, update the last recommended movie
                 if tag == "recommend_movie" or tag.startswith("recommend_"):
@@ -187,11 +230,18 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
                     else:
                         response = f"The IMDb rating for {movie_name} is {rating}."
                 
+                # Add sentiment-based responses for neutral and negative sentiments
+                if sentiment == "negative" and tag == "recommend_movie":
+                    response = "I'm sorry to hear that you didn't like the recommendation. How about another genre? " + response
+
                 response_parts.append(response)
                 break
 
     final_response = " ".join(response_parts)
     return final_response, sentiment_scores
+
+
+
 
 
 def chatbot_response(msg, previous_sentiment):
@@ -282,25 +332,8 @@ def send_message():
     previous_sentiment = request.json.get('previous_sentiment', None)
     response, new_sentiment, movie_name = chatbot_response(message, previous_sentiment)
 
-    # Context-specific quick replies
-    if "hello" in message.lower() or "hi" in message.lower():
-        quick_replies = ["Recommend a movie", "What movies can you recommend?"]
-    elif "recommend" in message.lower() and not ("about" in message.lower() or "details" in message.lower() or "rating" in message.lower()):
-        quick_replies = ["Recommend an action movie", "Recommend a comedy movie", "Recommend a drama movie"]
-    elif "about" in message.lower() or "details" in message.lower():
-        quick_replies = ["What is the IMDb rating?", "Suggest another movie", "Ask something else"]
-    elif "IMDb rating" in message.lower() or "rating" in message.lower():
-        quick_replies = ["Suggest another movie", "Ask something else"]
-    elif "another movie" in message.lower():
-        quick_replies = ["Recommend an action movie", "Recommend a comedy movie", "Recommend a drama movie"]
-    else:
-        # Assume the response contains a movie recommendation
-        if movie_name:
-            quick_replies = [f"What is {movie_name} about?", "Can you give any details on the movie?", "What is the IMDb rating?"]
-        else:
-            quick_replies = ["What is the movie about?", "Can you give any details on the movie?", "What is the IMDb rating?"]
+    return jsonify({'response': response, 'sentiment': new_sentiment})
 
-    return jsonify({'response': response, 'sentiment': new_sentiment, 'quick_replies': quick_replies})
 
 
 if __name__ == '__main__':
