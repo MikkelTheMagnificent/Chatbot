@@ -17,55 +17,72 @@
     </div>
     
     <script>
-        function sendMessage() {
-            const inputBox = document.getElementById('user-input');
-            const message = inputBox.value;
-            if (message.trim() === "") return;
+       // JavaScript for quick replies with context and enter key event
+document.addEventListener('DOMContentLoaded', (event) => {
+    const inputBox = document.getElementById('user-input');
 
-            // Display user message
-            const chatBox = document.getElementById('chat-box');
-            const userMessage = document.createElement('div');
-            userMessage.className = 'user-message message';
-            userMessage.innerText = message;
-            chatBox.appendChild(userMessage);
-
-            // Send message to server
-            fetch('/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: message }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display chatbot response
-                const botMessage = document.createElement('div');
-                botMessage.className = 'bot-message message';
-                botMessage.innerText = data.response;
-                chatBox.appendChild(botMessage);
-                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
-
-                // Display quick replies if any
-                const quickRepliesContainer = document.createElement('div');
-                quickRepliesContainer.className = 'quick-replies';
-                if (data.quick_replies) {
-                    data.quick_replies.forEach(reply => {
-                        const quickReply = document.createElement('div');
-                        quickReply.className = 'quick-reply';
-                        quickReply.innerText = reply;
-                        quickReply.onclick = () => {
-                            inputBox.value = reply;
-                            sendMessage();
-                        };
-                        quickRepliesContainer.appendChild(quickReply);
-                    });
-                    chatBox.appendChild(quickRepliesContainer);
-                }
-            });
-
-            inputBox.value = '';
+    // Add event listener for Enter key
+    inputBox.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default action (form submission)
+            sendMessage();
         }
+    });
+});
+
+function sendMessage() {
+    const inputBox = document.getElementById('user-input');
+    const message = inputBox.value;
+    if (message.trim() === "") return;
+
+    // Display user message
+    const chatBox = document.getElementById('chat-box');
+    const userMessage = document.createElement('div');
+    userMessage.className = 'user-message message';
+    userMessage.innerText = message;
+    chatBox.appendChild(userMessage);
+
+    // Send message to server
+    fetch('/send', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display chatbot response
+        const botMessage = document.createElement('div');
+        botMessage.className = 'bot-message message';
+        botMessage.innerText = data.response;
+        chatBox.appendChild(botMessage);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+
+        // Display quick replies based on context
+        displayQuickReplies(data.quick_replies);
+    });
+
+    inputBox.value = '';
+}
+
+function displayQuickReplies(quickReplies) {
+    const chatBox = document.getElementById('chat-box');
+    const quickRepliesContainer = document.createElement('div');
+    quickRepliesContainer.className = 'quick-replies';
+    quickReplies.forEach(reply => {
+        const quickReply = document.createElement('div');
+        quickReply.className = 'quick-reply';
+        quickReply.innerText = reply;
+        quickReply.onclick = () => {
+            document.getElementById('user-input').value = reply;
+            sendMessage();
+        };
+        quickRepliesContainer.appendChild(quickReply);
+    });
+    chatBox.appendChild(quickRepliesContainer);
+}
+
     </script>
 </body>
 </html>

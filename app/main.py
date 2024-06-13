@@ -9,12 +9,14 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from flask import Flask, request, jsonify, render_template
+import spacy
 
 nltk.download('punkt')
 nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
 analyzer = SentimentIntensityAnalyzer()
+nlp = spacy.load("en_core_web_sm")
 app = Flask(__name__)
 
 # Load necessary files
@@ -27,6 +29,14 @@ model = load_model('chatbot_model.h5')
 conversation_history = []
 last_recommended_movie = "" #Track the last recommended movie
 
+# List of movie names
+movie_names = [
+    "mad max: fury road", "john wick", "die hard", "the dark knight",
+    "superbad", "the hangover", "step brothers", "anchorman",
+    "the notebook", "pride and prejudice", "la la land", "titanic",
+    "inception", "interstellar", "the matrix", "blade runner 2049",
+    "the conjuring", "get out", "hereditary", "a quiet place"
+]
 
 # Movie details dictionary (keeping your movie details here)
 movie_details = {
@@ -95,11 +105,26 @@ def predict_class(sentence, model):
     return return_list
 
 
+def recognize_entities(text):
+    entities = {'movies': []}
+    for movie in movie_names:
+        if movie.lower() in text.lower():
+            entities['movies'].append(movie.lower())
+    print(f"Recognized entities: {entities}")  # Debugging statement
+    return entities['movies']
+
+
+
+
 def extract_movie_name(sentence):
-    for movie in movie_details.keys():
-        if all(word in sentence.lower() for word in movie.split()):
-            return movie
+    movie_names_list = recognize_entities(sentence)  # Returns a list of movie names
+    print(f"Extracted movie names: {movie_names_list}")  # Debugging statement
+    for movie_name in movie_names_list:
+        if movie_name in movie_details:
+            return movie_name
     return ""
+
+
 
 
 
@@ -134,20 +159,24 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
                     response = random.choice(i.get('negative_responses', i['responses']))
                 else:
                     response = random.choice(i.get('neutral_responses', i['responses']))
-                
-                response_parts.append(response)
-                
-                # Handle specific tags for context
+
+                # If this is a recommendation, update the last recommended movie
                 if tag == "recommend_movie" or tag.startswith("recommend_"):
-                    last_recommended_movie = extract_movie_name(response)
-                
+                    response_text = response.lower().strip("'\"")
+                    extracted_movie = extract_movie_name(response_text)
+                    if extracted_movie:
+                        last_recommended_movie = extracted_movie
+                    print(f"Updated last recommended movie: {last_recommended_movie}")  # Debugging statement
+
+                # If this is a request for movie details, use the last recommended movie
                 if tag == "movie_details":
                     movie_name = extract_movie_name(user_query)
                     if not movie_name and last_recommended_movie:
                         movie_name = last_recommended_movie
-                    movie_detail = movie_details.get(movie_name, "I'm sorry, I don't have details about that movie.")
-                    response_parts.append(movie_detail)
-                
+                    movie_detail = movie_details.get(movie_name, f"I'm sorry, I don't have details about '{movie_name}'.")
+                    response = movie_detail
+                    print(f"Using movie name: {movie_name}")
+
                 if tag == "imdb_rating":
                     movie_name = extract_movie_name(user_query)
                     if not movie_name and last_recommended_movie:
@@ -157,8 +186,8 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
                         response = f"The IMDb rating for {movie_name} is {rating}. For more details, visit: {short_url}"
                     else:
                         response = f"The IMDb rating for {movie_name} is {rating}."
-                    response_parts.append(response)
-
+                
+                response_parts.append(response)
                 break
 
     final_response = " ".join(response_parts)
@@ -166,21 +195,31 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
 
 
 def chatbot_response(msg, previous_sentiment):
+    global last_recommended_movie
     ints = predict_class(msg, model)
     if not ints:
         return "I'm not sure how to respond to that.", previous_sentiment, None
     res, new_sentiment = get_response(ints, intents, msg, previous_sentiment)
     
-    # Extract movie name if present in the response
-    movie_name = None
-    for movie in movie_details.keys():
-        if movie.lower() in res.lower():
-            movie_name = movie.lower()
-            break
+    # Debugging statements to trace the process
+    print(f"Input message: {msg}")
+    print(f"Predicted intents: {ints}")
+    print(f"Response: {res}")
+    print(f"Last recommended movie before update: {last_recommended_movie}")
 
-    conversation_history.append((msg, res, new_sentiment))  # Append the conversation to history
-    return res, new_sentiment, movie_name
+    # Update last recommended movie if it was a recommendation response
+    if 'recommend_movie' in [i['intent'] for i in ints] or any(i['intent'].startswith('recommend_') for i in ints):
+        response_text = res.lower().strip("'\"")
+        extracted_movie = extract_movie_name(response_text)
+        if extracted_movie:
+            last_recommended_movie = extracted_movie
+        print(f"Updated last recommended movie in chatbot_response: {last_recommended_movie}")  # Debugging statement
 
+    conversation_history.append((msg, res, new_sentiment))
+    return res, new_sentiment, last_recommended_movie
+
+##################################################################################################################
+##################################################################################################################
 
 
 def summarize_conversation(conversation_history):
