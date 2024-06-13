@@ -1,3 +1,11 @@
 flask
 nltk
 spacy
+
+
+imdb rating implementeret - hvad ligger filmens imdb rating på?
+
+Hvad kan du? omkring chatbottens funktionalitet (Y)
+
+
+Sortering af json dataset, således at alle film har en details samt indgår i movie names i main filen.

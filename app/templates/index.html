@@ -59,28 +59,17 @@ function sendMessage() {
         chatBox.appendChild(botMessage);
         chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
 
-        // Display quick replies based on context
-        displayQuickReplies(data.quick_replies);
+        // Display chatbot summary if available
+        if (data.summary) {
+            const summaryMessage = document.createElement('div');
+            summaryMessage.className = 'bot-message message';
+            summaryMessage.innerText = data.summary;
+            chatBox.appendChild(summaryMessage);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
     });
 
     inputBox.value = '';
-}
-
-function displayQuickReplies(quickReplies) {
-    const chatBox = document.getElementById('chat-box');
-    const quickRepliesContainer = document.createElement('div');
-    quickRepliesContainer.className = 'quick-replies';
-    quickReplies.forEach(reply => {
-        const quickReply = document.createElement('div');
-        quickReply.className = 'quick-reply';
-        quickReply.innerText = reply;
-        quickReply.onclick = () => {
-            document.getElementById('user-input').value = reply;
-            sendMessage();
-        };
-        quickRepliesContainer.appendChild(quickReply);
-    });
-    chatBox.appendChild(quickRepliesContainer);
 }
 
     </script>

@@ -6,6 +6,8 @@ import requests
 import numpy as np
 import nltk
 import spacy
+from collections import Counter
+from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -15,6 +17,7 @@ from textblob import TextBlob
 
 nltk.download('punkt')
 nltk.download('wordnet')
+nltk.download('stopwords')
 
 lemmatizer = WordNetLemmatizer()
 analyzer = SentimentIntensityAnalyzer()
@@ -31,17 +34,8 @@ model = load_model('chatbot_model.h5')
 conversation_history = []
 last_recommended_movie = "" #Track the last recommended movie
 sentiment_scores_history = [] # Track sentiment scores
+mentioned_movies = set()  # Track all mentioned movies
 
-# Add custom words and their sentiment scores
-new_words = {
-    'hate': -3.0,
-    'horrible': -2.5,
-    'terrible': -2.5,
-    'dislike': -2.0,
-    'not good': -2.0,
-}
-
-analyzer.lexicon.update(new_words)
 
 # List of movie names
 movie_names = [
@@ -126,8 +120,10 @@ def recognize_entities(text):
     for movie in movie_names:
         if movie.lower() in text.lower():
             entities['movies'].append(movie.lower())
+            mentioned_movies.add(movie.lower())  # Use add instead of append
     print(f"Recognized entities: {entities}")  # Debugging statement
     return entities['movies']
+
 
 
 def extract_movie_name(sentence):
@@ -137,6 +133,8 @@ def extract_movie_name(sentence):
         if movie_name in movie_details:
             return movie_name
     return ""
+
+
 #################################################################################
                             # Sentiment analyser
 #################################################################################
@@ -229,7 +227,7 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
                         response = f"The IMDb rating for {movie_name} is {rating}. For more details, visit: {short_url}"
                     else:
                         response = f"The IMDb rating for {movie_name} is {rating}."
-                
+
                 # Add sentiment-based responses for neutral and negative sentiments
                 if sentiment == "negative" and tag == "recommend_movie":
                     response = "I'm sorry to hear that you didn't like the recommendation. How about another genre? " + response
@@ -240,12 +238,9 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
     final_response = " ".join(response_parts)
     return final_response, sentiment_scores
 
-
-
-
-
 def chatbot_response(msg, previous_sentiment):
     global last_recommended_movie
+    global conversation_summary_generated
     ints = predict_class(msg, model)
     if not ints:
         return "I'm not sure how to respond to that.", previous_sentiment, None
@@ -266,49 +261,64 @@ def chatbot_response(msg, previous_sentiment):
         print(f"Updated last recommended movie in chatbot_response: {last_recommended_movie}")  # Debugging statement
 
     conversation_history.append((msg, res, new_sentiment))
+    
+    if msg.lower() == "quit" or 'farewells' in [i['intent'] for i in ints]:
+        summary = generate_summary(conversation_history)
+        res += f"\n{summary}"
+
     return res, new_sentiment, last_recommended_movie
 
+
+
+
 ##################################################################################################################
 ##################################################################################################################
 
-
-def summarize_conversation(conversation_history):
-    summary = "Here's a summary of our conversation:\n\nTopics Discussed:\n"
-    topics = []
+def generate_summary(conversation_history):
+    discussed_movies = set(mentioned_movies)  # Use mentioned_movies instead of recognizing again
     sentiments = {'positive': 0, 'neutral': 0, 'negative': 0}
-    
+    word_freq = {}
+
     for entry in conversation_history:
-        user_input, bot_response, sentiment_scores = entry
-        topics.append(user_input)
+        user_input, _, sentiment_scores = entry
+        words = nltk.word_tokenize(user_input)
+        words = [lemmatizer.lemmatize(word.lower()) for word in words if word.isalnum()]
+        for word in words:
+            if word not in nltk.corpus.stopwords.words('english'):
+                word_freq[word] = word_freq.get(word, 0) + 1
+
         sentiment = "positive" if sentiment_scores['compound'] > 0.6 else "negative" if sentiment_scores['compound'] < -0.6 else "neutral"
         sentiments[sentiment] += 1
-    
-    for topic in topics:
-        summary += f"- {topic}\n"
-    
-    total_conversations = len(conversation_history)
-    sentiment_percentages = {k: (v / total_conversations) * 100 for k, v in sentiments.items()}
-    
-    summary += "\nSentiment percentages:\n"
-    summary += f"Positive: {sentiment_percentages['positive']:.1f}%, Neutral: {sentiment_percentages['neutral']:.1f}%, Negative: {sentiment_percentages['negative']:.1f}%\n"
-    
+
+    discussed_movies_list = list(discussed_movies)
+    if discussed_movies_list:
+        movie_summary = ", ".join(discussed_movies_list)
+    else:
+        movie_summary = "various movies"
+
+    most_frequent_sentiment = max(sentiments, key=sentiments.get)
+    word_freq_list = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)[:10]
+    word_freq_str = ", ".join([f"{word}: {freq}" for word, freq in word_freq_list])
+    summary = (f"In our conversation, we discussed {movie_summary}. "
+               f"You felt {most_frequent_sentiment} through most of the conversation.\n"
+               f"Most frequent words (excluding stopwords): {word_freq_str}.")
     return summary
 
 
 # Test sentiment analysis
-test_sentences = [
-    "I am so happy today!",
-    "This is the worst movie I have ever seen.",
-    "I feel okay about this.",
-]
+#test_sentences = [
+#    "I am so happy today!",
+#    "This is the worst movie I have ever seen.",
+#    "I feel okay about this.",
+#]
 
-previous_sentiment = None
+#previous_sentiment = None
 
-for sentence in test_sentences:
-    sentiment = analyze_sentiment(sentence)
-    print(f"Input: {sentence}")
-    print(f"Detected sentiment: {sentiment}")
-    print("-" * 50)
+#for sentence in test_sentences:
+#    sentiment = analyze_sentiment(sentence)
+#    print(f"Input: {sentence}")
+#    print(f"Detected sentiment: {sentiment}")
+#    print("-" * 50)
 
 # Running the chatbot
 #print("GO! Bot is running!")
