@@ -22,25 +22,25 @@
                 "hi there"
             ],
             "positive_responses": [
-                "Hello! It's great to see you so positive!",
-                "Hi there! What can I do for you on this lovely day?",
-                "Hey! You seem happy today!",
-                "Hi! It's wonderful to see you in such a good mood!",
-                "Hello! Your positivity is infectious!"
+                "Hello! It's great to see you so positive! I'm your movie recommendation chatbot. You can ask me for movie suggestions, details about a movie, or even the latest movie ratings.",
+                "Hi there! What can I do for you on this lovely day? I'm here to help you find movies to watch, provide details on your favorite movies, and more.",
+                "Hey! You seem happy today! I'm your friendly movie recommendation assistant. Feel free to ask for movie recommendations, movie details, or IMDb ratings.",
+                "Hi! It's wonderful to see you in such a good mood! I can suggest movies, give you information about them, or fetch the latest ratings for you.",
+                "Hello! Your positivity is infectious! I'm here to assist with movie recommendations, movie details, and ratings. What can I do for you?"
             ],
             "neutral_responses": [
-                "Hello. How can I assist you today?",
-                "Hi. What can I help you with?",
-                "Hey. How's it going?",
-                "Hello. How may I assist you?",
-                "Hi. What's up?"
+                "Hello. How can I assist you today? I'm your movie recommendation chatbot. You can ask me for movie suggestions, details about a movie, or the latest movie ratings.",
+                "Hi. What can I help you with? I'm here to suggest movies, provide movie details, and give you IMDb ratings.",
+                "Hey. How's it going? I can recommend movies, tell you about them, or fetch their ratings. Just let me know what you need.",
+                "Hello. How may I assist you? I'm your friendly chatbot for movie recommendations, details, and ratings.",
+                "Hi. What's up? Feel free to ask me for movie suggestions, details about movies, or IMDb ratings."
             ],
             "negative_responses": [
-                "Hello. I'm here to help if you're feeling down.",
-                "Hi there. How can I assist you today?",
-                "Hey. I'm here if you need to talk.",
-                "Hello. Let's see how I can help.",
-                "Hi. I'm here for you."
+                "Hello. I'm here to help if you're feeling down. I'm your movie recommendation chatbot, and I can suggest some great movies to lift your spirits. You can also ask me for movie details or ratings.",
+                "Hi there. How can I assist you today? If you're looking for a good movie to watch, I can help. You can also ask me for information about movies or their ratings.",
+                "Hey. I'm here if you need to talk. I can recommend movies, provide details about them, or give you IMDb ratings.",
+                "Hello. Let's see how I can help. I'm your friendly movie recommendation assistant. You can ask me for movie suggestions, details, or ratings.",
+                "Hi. I'm here for you. Whether you need movie recommendations, details about a film, or the latest ratings, I'm here to assist."
             ]
         },
         {
@@ -325,22 +325,19 @@
                 "'The Conjuring' is a terrifying horror movie, perfect for your adventurous mood.", 
                 "'Get Out' is a critically acclaimed horror film that matches your excitement.", 
                 "'Hereditary' is a chilling horror movie that will keep you on the edge of your seat.", 
-                "'A Quiet Place' is a suspenseful horror film, ideal for your thrill-seeking mood.", 
-                "'It' is another great horror movie that fits your positive energy."
+                "'A Quiet Place' is a suspenseful horror film, ideal for your thrill-seeking mood."
             ],
             "neutral_responses": [
                 "'The Conjuring' is a terrifying horror movie.", 
                 "'Get Out' is a critically acclaimed horror film.", 
                 "'Hereditary' is a chilling horror movie.", 
-                "'A Quiet Place' is a suspenseful horror film.", 
-                "'It' is a popular horror movie many people enjoy."
+                "'A Quiet Place' is a suspenseful horror film."
             ],
             "negative_responses": [
                 "'The Conjuring' is a terrifying horror movie that might take your mind off things.", 
                 "'Get Out' is a critically acclaimed horror film that could distract you.", 
                 "'Hereditary' is a chilling horror movie that might improve your mood.", 
-                "'A Quiet Place' is a suspenseful horror film that could help you feel better.", 
-                "'It' is a horror movie that might help you escape reality for a bit."
+                "'A Quiet Place' is a suspenseful horror film that could help you feel better."
             ]
         },
         {
@@ -406,36 +403,59 @@
             ]
         },
         {
-            "tag": "movie_details",
-            "patterns": [
-                "Tell me about 'Inception'", 
-                "What is 'The Matrix' about?", 
-                "Details about 'Titanic'", 
-                "What's the plot of 'Interstellar'?", 
-                "Can you describe 'The Godfather'?"
-            ],
-            "positive_responses": [
-                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others. It's perfect for your curious mood!",
-                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality. A great choice for your adventurous mood!",
-                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic. Ideal for your great mood!",
-                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet. Perfect for your mindset!",
-                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone. A classic film for your mood!"
-            ],
-            "neutral_responses": [
-                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others.",
-                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality.",
-                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic.",
-                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet.",
-                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone."
-            ],
-            "negative_responses": [
-                "'Inception' is a sci-fi movie directed by Christopher Nolan. It's about a thief who enters the dreams of others. It might distract you from your worries.",
-                "'The Matrix' is a sci-fi movie that explores a dystopian future where humanity is trapped inside a simulated reality. It might help you escape reality for a bit.",
-                "'Titanic' is a romance and disaster movie about the ill-fated voyage of the RMS Titanic. It might help you feel better.",
-                "'Interstellar' is a sci-fi film about a group of astronauts who travel through a wormhole in search of a new habitable planet. It might lift your spirits.",
-                "'The Godfather' is a drama about the powerful Italian-American crime family of Don Vito Corleone. It might improve your mood."
-            ]
-        },
+          
+                "tag": "movie_details",
+                "patterns": [
+                  "Tell me about 'Inception'", 
+                  "What is 'The Matrix' about?", 
+                  "Details about 'Titanic'", 
+                  "What's the plot of 'Interstellar'?", 
+                  "Can you describe 'The Godfather'?",
+                  "What's 'Gladiator' about?",
+                  "Explain 'Superbad'",
+                  "Plot of 'The Hangover'",
+                  "Synopsis of 'Step Brothers'",
+                  "Describe 'Anchorman'",
+                  "What's the story of 'Bridesmaids'?",
+                  "What happens in 'The Notebook'?",
+                  "Give me details about 'Pride and Prejudice'",
+                  "Summarize 'La La Land'",
+                  "What's the premise of 'Before Sunrise'?",
+                  "Outline 'The Conjuring'",
+                  "What is 'Get Out' about?",
+                  "Tell me the plot of 'Hereditary'",
+                  "Details about 'A Quiet Place'",
+                  "Describe 'The Shawshank Redemption'",
+                  "What's the story of 'Forrest Gump'?",
+                  "Explain 'The Godfather'",
+                  "What's 'Fight Club' about?",
+                  "Synopsis of 'A Beautiful Mind'",
+                  "What happens in 'Toy Story'?",
+                  "Give me details about 'Spirited Away'",
+                  "What's the plot of 'Finding Nemo'?",
+                  "Describe 'The Lion King'",
+                  "What is 'Up' about?"
+                ],
+                "positive_responses": [
+                  "'{movie_name}' is {movie_details}. Perfect for your curious mood!",
+                  "'{movie_name}' is {movie_details}. A great choice for your adventurous mood!",
+                  "'{movie_name}' is {movie_details}. Ideal for your great mood!",
+                  "'{movie_name}' is {movie_details}. Perfect for your mindset!",
+                  "'{movie_name}' is {movie_details}. A classic film for your mood!"
+                ],
+                "neutral_responses": [
+                  "'{movie_name}' is {movie_details}.",
+                  "Here's the summary: '{movie_name}' is {movie_details}.",
+                  "Details: '{movie_name}' is {movie_details}."
+                ],
+                "negative_responses": [
+                  "'{movie_name}' is {movie_details}. It might distract you from your worries.",
+                  "'{movie_name}' is {movie_details}. It might help you escape reality for a bit.",
+                  "'{movie_name}' is {movie_details}. It might help you feel better.",
+                  "'{movie_name}' is {movie_details}. It might lift your spirits.",
+                  "'{movie_name}' is {movie_details}. It might improve your mood."
+                ]
+          },
         {
             "tag": "mood_recommendation",
             "patterns": [
@@ -513,52 +533,6 @@
                 "I can suggest action, comedy, romance, sci-fi, horror, drama, and animated movies. Let's find something enjoyable.",
                 "I can answer questions about various movie genres. Maybe we can find something to brighten your day.",
                 "I can help you find the perfect movie for any occasion. Let's look for something that might improve your mood."
-            ]
-        },
-        {
-            "tag": "movie_details",
-            "patterns": [
-                "Tell me about [movie name]",
-                "What is [movie name] about?",
-                "Give me details about [movie name]",
-                "What's the plot of [movie name]?",
-                "Describe [movie name]",
-                "Can you explain the story of [movie name]?",
-                "I want to know about [movie name]",
-                "What happens in [movie name]?",
-                "Summarize [movie name]",
-                "Give me a brief about [movie name]",
-                "What is the main plot of [movie name]?",
-                "Can you tell me the storyline of [movie name]?",
-                "What is the background of [movie name]?",
-                "Explain [movie name]",
-                "I need a summary of [movie name]",
-                "What is the theme of [movie name]?",
-                "What is the setting of [movie name]?",
-                "Tell me the key points of [movie name]",
-                "Give me an overview of [movie name]",
-                "I want a description of [movie name]"
-            ],
-            "positive_responses": [
-                "Here's an exciting detail about the movie you asked about! You're going to love it!",
-                "Here are the interesting details of the movie you asked about! Perfect for your mood!",
-                "Let me tell you more about this fantastic movie! You're in for a treat!",
-                "You'll love the details about this movie! It's a great choice for your mood!",
-                "Here's a thrilling summary of the movie you asked about! Enjoy!"
-            ],
-            "neutral_responses": [
-                "Here are the details of the movie you asked about.",
-                "Let me provide you with the information about this movie.",
-                "Here's a summary of the movie you asked about.",
-                "Here's what the movie is about.",
-                "These are the key points of the movie you asked about."
-            ],
-            "negative_responses": [
-                "Here are the details of the movie you asked about. Hope it takes your mind off things.",
-                "Let me provide you with the information about this movie. Maybe it'll cheer you up.",
-                "Here's a summary of the movie you asked about. Hope it helps improve your mood.",
-                "Here's what the movie is about. It might help distract you for a while.",
-                "These are the key points of the movie you asked about. I hope it brings some comfort."
             ]
         },
         {
