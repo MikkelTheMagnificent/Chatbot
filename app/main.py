@@ -1,12 +1,10 @@
 import json
-import re
 import random
 import pickle
 import requests
 import numpy as np
 import nltk
 import spacy
-from collections import Counter
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
@@ -130,11 +128,7 @@ def predict_class(sentence, model):
         return {"intent": classes[results[0][0]], "probability": str(results[0][1])}
     else:
         return None
-
-
-#################################################################################
-                            # Entity recognition
-#################################################################################
+    
 
 def recognize_entities(text):
     print(f"Recognizing entities in text: {text}")
@@ -148,7 +142,6 @@ def recognize_entities(text):
     return entities['movies']
 
 
-
 def extract_movie_name(sentence):
     movie_names_list = recognize_entities(sentence)  
     if not movie_names_list:
@@ -159,10 +152,9 @@ def extract_movie_name(sentence):
     for movie_name in movie_names_list:
         for key in movie_details.keys():
             if movie_name == key.lower():
-                return key  # Return the correctly cased key from the dictionary
+                return key 
     print("No valid movie names found in sentence.")
     return ""
-
 
 
 def update_last_recommended_movie(response):
@@ -174,9 +166,7 @@ def update_last_recommended_movie(response):
     else:
         print("No movie name found to update last recommended movie.")
 
-#################################################################################
-                            # Sentiment analyser
-#################################################################################
+
 def analyze_sentiment(text, previous_sentiment=None):
     # VADER analysis
     sentiment_vader_scores = analyzer.polarity_scores(text)
@@ -224,7 +214,7 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
     if not intents_list:
         return "I'm sorry, I don't understand.", previous_sentiment
 
-    primary_intent = intents_list[0]  # Choose the most probable intent
+    primary_intent = intents_list[0]  
     response_parts = []
     sentiment, sentiment_scores = analyze_sentiment(user_query, previous_sentiment)
 
@@ -254,7 +244,6 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
                     movie_name = last_recommended_movie
                 movie_detail = movie_details.get(movie_name, f"I'm sorry, I don't have details about '{movie_name}'.")
                 response = movie_detail
-                print(f"Using movie name: {movie_name}")
 
             if tag == "imdb_rating":
                 movie_name = extract_movie_name(user_query)
@@ -281,7 +270,6 @@ def chatbot_response(msg, previous_sentiment):
         return "I'm not sure how to respond to that.", previous_sentiment, None
     res, new_sentiment = get_response([intent], intents, msg, previous_sentiment)
     
-    # Debugging statements to trace the process
     print(f"Input message: {msg}")
     print(f"Predicted intent: {intent}")
     print(f"Response: {res}")
@@ -299,10 +287,6 @@ def chatbot_response(msg, previous_sentiment):
 
     return res, new_sentiment, last_recommended_movie
 
-
-
-##################################################################################################################
-##################################################################################################################
 
 def generate_summary(conversation_history):
     discussed_movies = set(mentioned_movies)  

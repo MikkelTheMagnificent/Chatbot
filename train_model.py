@@ -9,12 +9,12 @@ with open('train_data.pkl', 'rb') as file:
     train_x, train_y = pickle.load(file)
 
 # Building the model
-model = Sequential() #The model will have layers added sequentially
-model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu')) # Input layer with 128 neurons
-model.add(Dropout(0.5)) # Dropout layer
-model.add(Dense(64, activation='relu')) # Hidden layer with 64 neurons
+model = Sequential() 
+model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu')) 
 model.add(Dropout(0.5)) 
-model.add(Dense(len(train_y[0]), activation='softmax')) # Output layer
+model.add(Dense(64, activation='relu')) 
+model.add(Dropout(0.5)) 
+model.add(Dense(len(train_y[0]), activation='softmax')) 
 
 # Compiling the model
 sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
