@@ -232,11 +232,9 @@ def get_response(intents_list, intents_json, user_query, previous_sentiment):
 
             print(f"Generated response: {response}")
 
-            # If this is a recommendation, update the last recommended movie
             if tag == "recommend_movie" or tag.startswith("recommend_"):
                 update_last_recommended_movie(response)
 
-            # If this is a request for movie details, use the last recommended movie
             if tag == "movie_details":
                 print(f"User query: {user_query}")
                 movie_name = extract_movie_name(user_query)
@@ -277,7 +275,6 @@ def chatbot_response(msg, previous_sentiment):
 
     if 'recommend_movie' in intent['intent'] or intent['intent'].startswith('recommend_'):
         update_last_recommended_movie(res)
-        print(f"Updated last recommended movie in chatbot_response: {last_recommended_movie}")
 
     conversation_history.append((msg, res, new_sentiment))
     
