@@ -136,7 +136,7 @@ def recognize_entities(text):
     entities = {'movies': []}
     for ent in doc.ents:
         print(f"Found entity: {ent.text} with label: {ent.label_}")
-        if ent.label_ == "WORK_OF_ART":  
+        if ent.label_ == "WORK_OF_ART":  # Spacy label for creative works, including films
             entities['movies'].append(ent.text.lower())  
             mentioned_movies.add(ent.text.lower())
     return entities['movies']
@@ -267,11 +267,6 @@ def chatbot_response(msg, previous_sentiment):
     if not intent:
         return "I'm not sure how to respond to that.", previous_sentiment, None
     res, new_sentiment = get_response([intent], intents, msg, previous_sentiment)
-    
-    print(f"Input message: {msg}")
-    print(f"Predicted intent: {intent}")
-    print(f"Response: {res}")
-    print(f"Last recommended movie before update: {last_recommended_movie}")
 
     if 'recommend_movie' in intent['intent'] or intent['intent'].startswith('recommend_'):
         update_last_recommended_movie(res)
@@ -322,9 +317,9 @@ def index():
 
 @app.route('/send', methods=['POST'])
 def send_message():
-    message = request.json.get('message')
-    previous_sentiment = request.json.get('previous_sentiment', None)
-    response, new_sentiment, movie_name = chatbot_response(message, previous_sentiment)
+    message = request.json.get('message') # Retrieve user message
+    previous_sentiment = request.json.get('previous_sentiment', None) 
+    response, new_sentiment, movie_name = chatbot_response(message, previous_sentiment) # Chatbot response
 
     return jsonify({'response': response, 'sentiment': new_sentiment})
 
